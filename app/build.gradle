@@ -13,6 +13,7 @@ buildscript {
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.3"
+    flavorDimensions "version"
 
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
@@ -33,6 +34,18 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+    productFlavors {
+        paid {
+            dimension "version"
+            applicationIdSuffix ".paid"
+            versionNameSuffix "-paid"
+        }
+        free {
+            dimension "version"
+            applicationIdSuffix ".free"
+            versionNameSuffix "-free"
+        }
     }
 }
 
