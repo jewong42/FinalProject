@@ -1,2 +1,3 @@
+include ':jokeactivity'
 include ':joker'
 include ':app', ':backend', ':joker'
