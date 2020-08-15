@@ -6,15 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.jewong.jokeactivity.JokeActivity;
-import com.jewong.joker.Joker;
 
-
-public class MainActivity extends AppCompatActivity {
-
-    Joker mJoker = new Joker();
+public class MainActivity extends AppCompatActivity implements EndpointsAsyncTaskCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +41,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        final String joke = mJoker.getJoke();
-        Toast.makeText(this, joke, Toast.LENGTH_SHORT).show();
-        launchJokeActivity(joke);
+        new EndpointsAsyncTask().execute(this);
     }
 
-    public void launchJokeActivity(String joke) {
+    @Override
+    public void onPostExecute(String result) {
         final Intent intent = new Intent(this, JokeActivity.class);
-        intent.putExtra(JokeActivity.JOKE_KEY, joke);
+        intent.putExtra(JokeActivity.JOKE_KEY, result);
         startActivity(intent);
     }
-
-
 }
